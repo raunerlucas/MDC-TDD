@@ -89,4 +89,20 @@ class MathUtilTest {
     }
 
 
+    @ParameterizedTest
+    @CsvSource({
+            "30,12,4,2"
+    })
+    void mdcP7(final Integer a, final Integer b, final Integer c, final Integer esp) {
+        assertEquals(esp, mdc(a, b, c));
+    }
+
+    @Test
+    void mdcUndfParam() {
+        assertThrows(IllegalArgumentException.class, MathUtil::mdc);
+    }
+    @Test
+    void mdcNullParam() {
+        assertThrows(NullPointerException.class, () -> mdc(null));
+    }
 }

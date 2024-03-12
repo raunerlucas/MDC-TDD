@@ -1,6 +1,8 @@
 package com.tddmdc.model;
 
 
+import java.util.Objects;
+
 public class MathUtil {
     public static Integer mdc(Integer a, Integer b) {
         // preparando para fazer funções
@@ -18,9 +20,19 @@ public class MathUtil {
         if (b == 0)
             return a;
 
-        // Propriedade 5
-        if (a % b != 0)
-            return 1;
-        return -1;
+        return mdc(a - b, b);
+    }
+
+    public static Integer mdc(Integer... valores) {
+        Objects.requireNonNull(valores, "NULL foi passado como parametro.");
+
+        if (valores.length == 0)
+            throw new IllegalArgumentException("Nenhum valor foi passado como parametro.");
+
+        Integer a = valores[0];
+        for (Integer b : valores) {
+            a = mdc(a, b);
+        }
+        return a;
     }
 }
